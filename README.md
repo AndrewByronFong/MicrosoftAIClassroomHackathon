@@ -2,9 +2,9 @@
 
 ## Quick Set Up:
 
-Install Node.js 
+### Install Node.js 
 
-Then run: 
+### Install Dependencies 
 
 ```bash
     npm install
