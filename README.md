@@ -1,9 +1,21 @@
 # MicrosoftAIClassroomHackathon
 
-Quick Set Up:
+## Quick Set Up:
 
 Install Node.js 
 
-Then run: npm install
+Then run: 
 
-Use open index.html for bot web interface or type node appBot.js for command shell bot interface.
+```bash
+    npm install
+```
+
+### For Bot Web Interface
+```bash
+    open index.html
+```
+
+### Command Shell Bot Interface
+```bash
+    node appBot.js
+```
