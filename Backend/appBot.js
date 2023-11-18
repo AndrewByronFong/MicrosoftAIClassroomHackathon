@@ -4,8 +4,9 @@ global.WebSocket = require("ws");
 const { DirectLine } = require("botframework-directlinejs");
 const { question } = require("readline-sync");
 
+console.log(process.env.secret);
 var directLine = new DirectLine({
-  secret: "SlkCINMACTM.0VZEIx4xW9qlJXbMdOKewcYrj8lLrguMX-YhKzvmKlE",
+  secret: process.env.SECRET,
   token: "",
   domain: "",
   webSocket: "",
