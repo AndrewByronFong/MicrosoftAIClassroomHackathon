@@ -15,4 +15,13 @@
     open index.html
 ```
 
-
+### Env Set Up For Devs
+```json
+# create settings.env
+{
+"SubscriptionKey": "{SUBSCRIPTION KEY}",
+"Endpoint": "{ENDPOINT}",
+"PassageIncremental": 61,
+"PassageStartCount": 1000
+}
+```
