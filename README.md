@@ -15,7 +15,4 @@
     open index.html
 ```
 
-### Command Shell Bot Interface
-```bash
-    node appBot.js
-```
+
