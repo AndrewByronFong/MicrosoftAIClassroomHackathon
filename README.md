@@ -22,6 +22,7 @@
 "SubscriptionKey": "{SUBSCRIPTION KEY}",
 "Endpoint": "{ENDPOINT}",
 "PassageIncremental": 61,
-"PassageStartCount": 1000
+"PassageStartCount": 1000, 
+"OpenAIKey": "{OPENAIKEY}"
 }
 ```
