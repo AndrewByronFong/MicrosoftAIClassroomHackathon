@@ -1,13 +1,13 @@
-const axios = require("axios");
-const fs = require("fs")
+import axios from "axios";
+import fs from "fs";
 
-settings = JSON.parse(fs.readFileSync("settings.env", "utf8"));
+const settings = JSON.parse(fs.readFileSync("settings.env", "utf8"));
 const subscriptionKey = settings.SubscriptionKey;
 const endpoint = settings.Endpoint;
 const passageIncremental = settings.PassageIncremental;
 const passageStartCount = settings.PassageStartCount;
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const addQna = async (qna) => {
   try {
@@ -139,17 +139,8 @@ const constructBody = (
         },
       ]
     );
-    body.push(
-      ...[
-        explanation,
-        choiced,
-        choicec,
-        choiceb,
-        choicea,
-        question,
-      ]
-    );
-    var prevexplanation;
+    body.push(...[explanation, choiced, choicec, choiceb, choicea, question]);
+    let prevexplanation;
     if (i !== 0) {
       prevexplanation = constructBodyPart(
         count,
@@ -192,7 +183,8 @@ const addAllQuestions = async (
   passage,
   starter
 ) => {
-  countCur = passageStartCount;
+  let countCur = passageStartCount;
+  let body, connectionBody;
   try {
     [body, connectionBody] = constructBody(
       countCur,
@@ -202,19 +194,15 @@ const addAllQuestions = async (
       questions,
       passage,
       starter
-    )
-    await addQna(
-      body
     );
+    await addQna(body);
     await sleep(10000);
-    await addQna(
-      connectionBody
-    )
+    await addQna(connectionBody);
     settings.PassageStartCount += passageIncremental;
-    fs.writeFileSync("settings.env", JSON.stringify(settings), "utf8")
+    fs.writeFileSync("settings.env", JSON.stringify(settings), "utf8");
   } catch (error) {
     console.error(error.message);
   }
 };
 
-module.exports = addAllQuestions;
+export { addAllQuestions };
