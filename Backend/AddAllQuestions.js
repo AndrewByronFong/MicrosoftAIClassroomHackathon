@@ -3,7 +3,8 @@ import fs from "fs";
 
 const settings = JSON.parse(fs.readFileSync("settings.env", "utf8"));
 const subscriptionKey = settings.SubscriptionKey;
-const endpoint = settings.Endpoint;
+const endpointForAdd = settings.Endpoints[0];
+const endpointForDeploy = settings.Endpoints[1];
 const passageIncremental = settings.PassageIncremental;
 const passageStartCount = settings.PassageStartCount;
 
@@ -11,7 +12,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const addQna = async (qna) => {
   try {
-    const response = await axios.patch(endpoint, qna, {
+    const response = await axios.patch(endpointForAdd, qna, {
       headers: {
         "Ocp-Apim-Subscription-Key": subscriptionKey,
         "Content-Type": "application/json",
@@ -22,6 +23,23 @@ const addQna = async (qna) => {
     console.error(error.message);
   }
 };
+
+const deploy = async () => {
+  await axios
+    .put(
+      endpointForDeploy,
+      {},
+      {
+        headers: {
+          "Ocp-Apim-Subscription-Key": subscriptionKey,
+          "Content-Length": "0",
+        },
+      }
+    )
+    .then((response) => console.log(response.headers))
+    .catch((error) => console.error(error.message));
+};
+
 const constructBodyPart = (
   idNum,
   answer,
@@ -200,6 +218,8 @@ const addAllQuestions = async (
     await addQna(connectionBody);
     settings.PassageStartCount += passageIncremental;
     fs.writeFileSync("settings.env", JSON.stringify(settings), "utf8");
+    await sleep(10000);
+    await deploy();
   } catch (error) {
     console.error(error.message);
   }
