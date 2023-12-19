@@ -1,4 +1,5 @@
 # MicrosoftAIClassroomHackathon
+GPT3.5-integrated chatbot service designed to facilitate the interaction between teachers and students, particularly those with ADHD.
 
 ## Quick Set Up:
 
